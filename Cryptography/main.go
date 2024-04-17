@@ -1,7 +1,10 @@
 package main
 
 import (
-	"flag"
+	"fmt"
+	"io"
+	"os"
+	"strings"
 )
 
 const ans_flag = "Chikawa"
@@ -11,21 +14,30 @@ const flg_txt = "EgG3MPjYTk8GFfClKHLCea14CSkHJGvC8Hc4MBEB4FPAG5J0ybagBFi1EDYbQLQ
 
 func main() {
 
-	cat := flag.String("c", "", "ファイルをCatした内容")
+	inputData, err := io.ReadAll(os.Stdin)
+	if err != nil {
+		fmt.Println("エラー:", err)
+		return
+	}
 
-	flag.Parse()
+	// 標準出力に書き込み
+	fmt.Println("入力されたデータ:", string(inputData))
 
-	if *cat == test_txt {
+	str := string(inputData)
+	str = strings.ReplaceAll(str, "\n", "")
+	str = strings.ReplaceAll(str, " ", "")
+
+	if str == test_txt {
 		println("正常にテスト用ファイルを解析しました。")
 		return
 	}
 
-	if *cat == flg_txt {
+	if str == flg_txt {
 		println(ans_flag)
 		return
 	}
 
-	println(*cat)
+	println(str)
 	println("ファイルの内容が違います")
 
 }
