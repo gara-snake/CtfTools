@@ -3,4 +3,8 @@ go 1.19
 use (
 	./Checkdir
 	./CtfExec
+	./Rewrite
+	./CheckRemove
+	./CheckDirectoryPath
+	./Cryptography
 )
